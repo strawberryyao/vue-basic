@@ -8,20 +8,37 @@
 </head>
 <body>
     <div id="app">
-
+      <div>{{ name }}</div>
+      <p s-text= "name"></p>
+      <p>{{age}}</p>
+      <p>{{doubleAge}}</p>
+      <input type="text" s-model="name"></input>
+      <!-- <button @click="changeName">呵呵</button> -->
+      <div k-html="html"></div>
     </div>
     <script src="./svue.js"></script>
+    <script src="./compile.js"></script>
+    
     <script>
+      // const app = new SVue({
+      //   data: {
+      //     test: 'I am test',
+      //     foo: {
+      //       bar: 'I am bar'
+      //     }
+      //   }
+      // })
+      // app.$data.test = 'hello test'
+      // app.$data.foo = 'hello bar'
+
       const app = new SVue({
+        el: "#app",
         data: {
-          test: 'I am test',
-          foo: {
-            bar: 'I am bar'
-          }
-        }
+          name: "I am test.",
+          age: 12,
+          html: "<button>这是一个按钮</button>"
+        },
       })
-      app.$data.test = 'hello test'
-      app.$data.foo = 'hello bar'
     </script>
 </body>
 </html>

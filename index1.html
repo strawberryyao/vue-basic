@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="name">
+    <p>{{abc}}</p>
+    <p>{{age}}</p>
+  </div>
+
+  <script>
+    let el = document.querySelector('#name')
+    const fragment = node2Fragment(el)
+    this.compile(fragment)
+    function node2Fragment(el) {
+      const frag = document.createDocumentFragment();
+      // 将el中所有子元素搬家至frag中
+      let child;
+      while ((child = el.firstChild)) {
+        frag.appendChild(child);
+      }
+      return frag;
+    }
+
+    function compile(el) {
+      const childNodes = el.childNodes;
+      Array.from(childNodes).forEach(node => {
+        // 类型判断
+        if (node.nodeType === 1) {
+          console.log(node.childNodes)
+        } else if (node.nodeType === 3 && /\{\{(.*)\}\}/.test(node.textContent)) {
+          console.log('22222', RegExp.$1);
+        }
+        // 递归子节点
+        if (node.childNodes && node.childNodes.length > 0) {
+          this.compile(node);
+        }
+      })
+  }
+  </script>
+</body>
+</html>
