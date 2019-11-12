@@ -33,10 +33,10 @@ class Compile {
       if(node.nodeType === 1) {
         //遍历元素属性 编译指令 事件
         console.log(node)
-      } else if (node.nodeType === 3) {
+      } else if (node.nodeType === 3 && /\{\{(.*)\}\}/.test(node.textContent)) {
         // 编译{{}}里面的属性
-        console.log(node.textContent);
-        // this.compileText(node)
+        // console.log(node.textContent);
+        this.compileText(node)
       }
 
       // 递归子节点 获取元素中的字节点
@@ -47,8 +47,18 @@ class Compile {
   }
 
   compileText (node) {
-    console.log(node)
-    
+    // console.log(node, this.$vm, RegExp.$1, 'text')
+    this.update(node, this.$vm, RegExp.$1, 'text')
+  }
+
+  // 中转站 更新函数
+  update (node,vm,exp,dir) {
+    const updateFn = this[dir+'Updater']
+    updateFn && updateFn()
+  }
+
+  text (node, vm, exp) {
+
   }
 
   isElementNode (node) {
