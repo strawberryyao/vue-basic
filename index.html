@@ -8,13 +8,16 @@
 </head>
 <body>
     <div id="app">
-      <div>{{ name }}</div>
+      <div>{{name}}</div>
       <p s-text= "name"></p>
       <p>{{age}}</p>
       <p>{{doubleAge}}</p>
       <input type="text" s-model="name"></input>
-      <!-- <button @click="changeName">呵呵</button> -->
-      <div k-html="html"></div>
+      <br>
+      <button @click="changeName">呵呵</button>
+      <br>
+      <br>
+      <div s-html="html"></div>
     </div>
     <script src="./svue.js"></script>
     <script src="./compile.js"></script>
@@ -37,6 +40,22 @@
           name: "I am test.",
           age: 12,
           html: "<button>这是一个按钮</button>"
+        },
+        created() {
+          console.log("开始啦");
+          setTimeout(() => {
+            this.name = "我是测试";
+          }, 1500);
+        },
+        methods: {
+          changeName () {
+            setTimeout (() => {
+              this.name = '哭了'
+              this.age = 150
+            },1000)
+            this.name = '笑了'
+            this.age = 10
+          }
         },
       })
     </script>
